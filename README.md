@@ -10,6 +10,7 @@ composer require ferrysyahrinal/twifer
 ```
 
 ```
+<?php
 require 'vendor/autoload.php';
 use Twifer\API;
 $conn = new API('CONSUMER_KEY', 'CONSUMER_SECRET', 'OAUTH_TOKEN', 'OAUTH_TOKEN_SECRET');
@@ -21,18 +22,30 @@ Usage :
 // Post tweet
 $parameter = ['status' => 'Hi World'];
 $req = $conn->request('POST', 'statuses/update', $parameter);
+$req = json_decode($req, true);
+print_r($req);
+```
+
+```
+// Delete tweet
+$id = '1512864814338506753'; //id tweet
+$req = $conn->request('POST', 'statuses/destroy/' . $id);
+$req = json_decode($req, true);
 print_r($req);
 ```
 
 ```
 // Get direct message
 $req = $conn->request('GET', 'direct_messages/events/list');
+$req = json_decode($req, true);
 print_r($req);
 ```
+
 ```
 // Lookup users
 $parameter = ['screen_name' => 'senggolbaok'];
 $req = $conn->request('GET', 'users/lookup', $parameter);
+$req = json_decode($req, true);
 print_r($req);
 ```
 

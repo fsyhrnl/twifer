@@ -5,6 +5,13 @@ use Twifer\API;
 
 $conn = new API('CONSUMER_KEY', 'CONSUMER_SECRET', 'OAUTH_TOKEN', 'OAUTH_TOKEN_SECRET');
 
+/*
+ *
+ * This is example
+ * Read more https://developer.twitter.com/en/docs/twitter-api/v1 to know other parameters.
+ *
+ */
+
 // Upload media
 $filename = 'profile.jpg';
 $parameter = ['media' => $filename];
