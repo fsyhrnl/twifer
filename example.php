@@ -19,3 +19,12 @@ print_r($req);
 $parameter = ['screen_name' => 'senggolbaok', 'count' => '2'];
 $req = $conn->request('GET', 'statuses/user_timeline', $parameter);
 print_r($req);
+
+// Get direct message
+$req = $conn->request('GET', 'direct_messages/events/list');
+print_r($req);
+
+// Lookup users
+$parameter = ['screen_name' => 'senggolbaok'];
+$req = $conn->request('GET', 'users/lookup', $parameter);
+print_r($req);
