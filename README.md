@@ -6,6 +6,7 @@ Usage :
 // Post tweet
 $parameter = ['status' => 'Hi World'];
 $req = $conn->request('POST', 'statuses/update', $parameter);
+print_r($req);
 ```
 
 ```
