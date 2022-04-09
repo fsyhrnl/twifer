@@ -27,7 +27,7 @@ class API
 
     }
 
-    private function getAuth($oauth)
+    private function buildAutheaders($oauth)
     {
         $headers = 'Authorization: OAuth ';
         $values = [];
@@ -49,55 +49,70 @@ class API
         return $method . "&" . rawurlencode($url) . '&' . rawurlencode(implode('&', $headers));
     }
 
-    public function request($method, $apiUrl, $params = false)
+    private function buildSignature($baseInfo)
     {
+        $encodeKey = rawurlencode($this->consumer_secret) . '&' . rawurlencode($this->oauth_token_secret);
+        $oauthSignature = base64_encode(hash_hmac('sha1', $baseInfo, $encodeKey, true));
+        return $oauthSignature;
+    }
 
-        if ($apiUrl == 'media/upload') {
-            return $this->reqUpload($method, $apiUrl, $params);
-            exit;
-        }
-
-        $url = $this->apiUrl . "{$apiUrl}.json";
-
-        $oauth = $this->oauth;
-
-        if ($params == false) {
-
-            $base_info = $this->buildString($method, $url, $oauth);
-            $composite_key = rawurlencode($this->consumer_secret) . '&' . rawurlencode($this->oauth_token_secret);
-            $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
-            $oauth['oauth_signature'] = $oauth_signature;
-
-        } else {
-
-            $oauth = array_merge($oauth, $params);
-            $base_info = $this->buildString($method, $url, $oauth);
-            $composite_key = rawurlencode($this->consumer_secret) . '&' . rawurlencode($this->oauth_token_secret);
-            $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
-            $oauth['oauth_signature'] = $oauth_signature;
-        }
-
-        $headers = [];
-        $headers[] = $this->getAuth($oauth);
-
+    private function reqCurl($method = 'GET', $url, $params = false, $headers, $postfields = false)
+    {
         $ch = curl_init();
+
         if ($params == false) {
             curl_setopt($ch, CURLOPT_URL, $url);
         } else {
             curl_setopt($ch, CURLOPT_URL, $url . "?" . http_build_query($params));
         }
+
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
         if ($method == 'POST') {
             curl_setopt($ch, CURLOPT_POST, true);
         }
-        $json = curl_exec($ch);
-        return json_decode($json, true);
 
+        if ($postfields != false) {
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
+        }
+
+        $res = curl_exec($ch);
+        return $res;
     }
 
-    public function reqUpload($method, $apiUrl, $params)
+    public function request($method, $apiUrl, $params = false)
+    {
+
+        $method = strtoupper($method);
+
+        if ($apiUrl == 'media/upload') {
+            return $this->upload($method, $apiUrl, $params);
+            exit;
+        }
+
+        $url = $this->apiUrl . "{$apiUrl}.json";
+        $oauth = $this->oauth;
+
+        if ($params == false) {
+            $baseInfo = $this->buildString($method, $url, $oauth);
+            $oauth['oauth_signature'] = $this->buildSignature($baseInfo);
+        } else {
+            $oauth = array_merge($oauth, $params);
+            $baseInfo = $this->buildString($method, $url, $oauth);
+            $oauth['oauth_signature'] = $this->buildSignature($baseInfo);
+        }
+
+        $headers = [];
+        $headers[] = $this->buildAutheaders($oauth);
+
+        $a = $this->reqCurl($method, $url, $params, $headers, null);
+        return $a;
+    }
+
+    public function upload($method, $apiUrl, $params)
     {
 
         $url = $this->apiUploadUrl . "{$apiUrl}.json";
@@ -110,30 +125,20 @@ class API
             $filename = $params['media_data'];
             $arr = ['media_data' => $filename];
         } else {
-            return 'doesnt work';
+            return 'upload using parameter media_category & additional_owners doesnt work :(';
             exit;
         }
 
         $oauth = $this->oauth;
-
-        $base_info = $this->buildString($method, $url, $oauth);
-        $composite_key = rawurlencode($this->consumer_secret) . '&' . rawurlencode($this->oauth_token_secret);
-        $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
-        $oauth['oauth_signature'] = $oauth_signature;
+        $baseInfo = $this->buildString($method, $url, $oauth);
+        $oauth['oauth_signature'] = $this->buildSignature($baseInfo);
 
         $headers = [];
-        $headers[] = $this->getAuth($oauth);
+        $headers[] = $this->buildAutheaders($oauth);
         $headers[] = 'Content-Type: multipart/form-data';
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $arr);
-        $json = curl_exec($ch);
-        return json_decode($json, true);
+        $a = $this->reqCurl($method, $url, null, $headers, $arr);
+        return $a;
 
     }
 
@@ -141,21 +146,14 @@ class API
     {
 
         $oauth = $this->oauth;
-        $base_info = $this->buildString("GET", $oauthUrl, $oauth);
-        $composite_key = rawurlencode($this->consumer_secret) . '&' . rawurlencode($this->oauth_token_secret);
-        $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
-        $oauth['oauth_signature'] = $oauth_signature;
+        $baseInfo = $this->buildString("GET", $oauthUrl, $oauth);
+        $oauth['oauth_signature'] = $this->buildSignature($baseInfo);
 
         $headers = [];
-        $headers[] = $this->getAuth($oauth);
+        $headers[] = $this->buildAutheaders($oauth);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $oauthUrl);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $json = curl_exec($ch);
-        return $json;
+        $a = $this->reqCurl("GET", $oauthUrl, null, $headers, null);
+        return $a;
 
     }
 
