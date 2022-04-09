@@ -1,5 +1,5 @@
 ## Twifer
-Simple PHP Library for Twitter API v1.1
+Simple PHP Library for Standard Twitter API v1.1
 - Coded with :smoking: by [@senggolbaok](https://twitter.com/senggolbaok)
 - :smoking: Buy Me a Cigarette : https://trakteer.id/setandarisurga
 
