@@ -85,7 +85,6 @@ class API
 
     public function request($method, $apiUrl, $params = false)
     {
-
         $method = strtoupper($method);
 
         if ($apiUrl == 'media/upload') {
