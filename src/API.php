@@ -2,7 +2,7 @@
 
 namespace Twifer;
 
-class Twifer
+class API
 {
     private $consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret;
     private $apiUrl = 'https://api.twitter.com/1.1/';
