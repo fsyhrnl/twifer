@@ -28,3 +28,8 @@ print_r($req);
 $parameter = ['screen_name' => 'senggolbaok'];
 $req = $conn->request('GET', 'users/lookup', $parameter);
 print_r($req);
+
+//
+$parameter = ['count' => '1'];
+$req = $conn->request('GET', 'statuses/mentions_timeline', $parameter);
+print_r($req);
