@@ -1,5 +1,6 @@
 ## Twifer
-Simple PHP Library for Standard Twitter API v1.1
+Simple PHP Library for Standard Twitter API v1.1<br>
+<img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard" alt="Twitter API v1.1 badge" crossorigin="anonymous">
 - Coded with :smoking: by [@senggolbaok](https://twitter.com/senggolbaok)
 - :smoking: Buy Me a Cigarette : https://trakteer.id/setandarisurga
 
