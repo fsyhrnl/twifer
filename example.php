@@ -3,7 +3,7 @@
 require 'vendor/autoload.php';
 use Twifer\API;
 
-$conn = new Twifer('CONSUMER_KEY', 'CONSUMER_SECRET', 'OAUTH_TOKEN', 'OAUTH_TOKEN_SECRET');
+$conn = new API('CONSUMER_KEY', 'CONSUMER_SECRET', 'OAUTH_TOKEN', 'OAUTH_TOKEN_SECRET');
 
 // Upload media
 $filename = 'profile.jpg';
