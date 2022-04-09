@@ -3,8 +3,21 @@ Simple PHP Library for Twitter OAuth REST API
 
 Usage :
 ```
+// Post tweet
 $parameter = ['status' => 'Hi World'];
 $req = $conn->request('POST', 'statuses/update', $parameter);
+```
+
+```
+// Get direct message
+$req = $conn->request('GET', 'direct_messages/events/list');
+print_r($req);
+```
+```
+// Lookup users
+$parameter = ['screen_name' => 'senggolbaok'];
+$req = $conn->request('GET', 'users/lookup', $parameter);
+print_r($req);
 ```
 
 See more example : [example.php](example.php)
