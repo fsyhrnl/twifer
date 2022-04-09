@@ -49,10 +49,10 @@ $req = json_decode($req, true);
 print_r($req);
 
 // Fetch image direct message
-$imgUrl = 'https://ton.twitter.com/i/ton/data/dm/1512741758110601221/1512741750716375042/Kc5APl6V.jpg';
+$imgUrl = 'https://ton.twitter.com/i/ton/data/dm/1512867595292057605/1512867589323882496/_6uELIwA.png';
 $req = $conn->file($imgUrl);
-$req = json_decode($req, true);
-file_put_contents('fileDm.jpg', $req);
+file_put_contents('saveImage.jpg', $req);
+//print_r(base64_encode($req));
 
 // Lookup user by username
 $parameter = ['screen_name' => 'senggolbaok'];
