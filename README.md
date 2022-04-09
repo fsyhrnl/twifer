@@ -27,3 +27,11 @@ Read more https://developer.twitter.com/en/docs/twitter-api/v1 to know other par
 ___
 - Coded with :smoking: by [@senggolbaok](https://twitter.com/senggolbaok)
 - :smoking: Buy Me a Cigarette : https://trakteer.id/setandarisurga
+
+## License
+This open-source software is distributed under the MIT License. See [License](LICENSE)
+
+## Contributing
+All kinds of contributions are welcome.
+- Bug reports.
+- Fix bugs / add new features.
