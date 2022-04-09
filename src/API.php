@@ -79,8 +79,8 @@ class API
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
         }
 
-        $res = curl_exec($ch);
-        return $res;
+        $result = curl_exec($ch);
+        return $result;
     }
 
     public function request($method, $apiUrl, $params = false)
@@ -108,8 +108,8 @@ class API
         $headers = [];
         $headers[] = $this->buildAutheaders($oauth);
 
-        $a = $this->reqCurl($method, $url, $params, $headers, null);
-        return $a;
+        $result = $this->reqCurl($method, $url, $params, $headers, null);
+        return $result;
     }
 
     public function upload($method, $apiUrl, $params)
@@ -137,8 +137,8 @@ class API
         $headers[] = $this->buildAutheaders($oauth);
         $headers[] = 'Content-Type: multipart/form-data';
 
-        $a = $this->reqCurl($method, $url, null, $headers, $arr);
-        return $a;
+        $result = $this->reqCurl($method, $url, null, $headers, $arr);
+        return $result;
 
     }
 
@@ -152,8 +152,8 @@ class API
         $headers = [];
         $headers[] = $this->buildAutheaders($oauth);
 
-        $a = $this->reqCurl("GET", $oauthUrl, null, $headers, null);
-        return $a;
+        $result = $this->reqCurl("GET", $oauthUrl, null, $headers, null);
+        return $result;
 
     }
 
