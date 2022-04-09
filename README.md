@@ -42,6 +42,14 @@ print_r($req);
 ```
 
 ```
+// Fetch image direct message / save image in direct message
+$imgUrl = 'https://ton.twitter.com/i/ton/data/dm/1512867595292057605/1512867589323882496/_6uELIwA.png'; //img url in direct message
+$req = $conn->file($imgUrl);
+file_put_contents('saveImage.jpg', $req);
+//print_r(base64_encode($req));
+```
+
+```
 // Lookup users
 $parameter = ['screen_name' => 'senggolbaok'];
 $req = $conn->request('GET', 'users/lookup', $parameter);
