@@ -1,5 +1,7 @@
 <?php
 
+namespace Twifer;
+
 class Twifer
 {
     private $consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret;
@@ -92,6 +94,7 @@ class Twifer
         }
         $json = curl_exec($ch);
         return json_decode($json, true);
+
     }
 
     public function reqUpload($method, $apiUrl, $params)
@@ -131,6 +134,29 @@ class Twifer
         curl_setopt($ch, CURLOPT_POSTFIELDS, $arr);
         $json = curl_exec($ch);
         return json_decode($json, true);
+
+    }
+
+    public function file($oauthUrl)
+    {
+
+        $oauth = $this->oauth;
+        $base_info = $this->buildString("GET", $oauthUrl, $oauth);
+        $composite_key = rawurlencode($this->consumer_secret) . '&' . rawurlencode($this->oauth_token_secret);
+        $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
+        $oauth['oauth_signature'] = $oauth_signature;
+
+        $headers = [];
+        $headers[] = $this->getAuth($oauth);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $oauthUrl);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $json = curl_exec($ch);
+        return $json;
+
     }
 
 }
