@@ -1,6 +1,6 @@
 {
     "name": "ferrysyahrinal/twifer",
-    "description": "Simple PHP Library for Twitter OAuth REST API",
+    "description": "Simple PHP Library for Standard Twitter API v1.1",
     "type": "library",
     "license": "MIT",
     "authors": [
