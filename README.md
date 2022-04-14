@@ -28,6 +28,10 @@ $conn = new API('CONSUMER_KEY', 'CONSUMER_SECRET', 'OAUTH_TOKEN', 'OAUTH_TOKEN_S
 ```
 
 ## Usage :
+```
+$conn->request(method, resource, parameter);
+```
+
 ```php
 // Post tweet
 $parameter = ['status' => 'Hi World'];
