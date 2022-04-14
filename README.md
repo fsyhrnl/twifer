@@ -6,6 +6,8 @@ Simple PHP Library for Twitter API Standard v1.1 && Twitter API v2<br>
 - :smoking: Buy Me a Cigarette : https://trakteer.id/setandarisurga
 
 ## Installation
+
+### Install with composer
 ```
 composer require ferrysyahrinal/twifer
 ```
@@ -17,6 +19,13 @@ use Twifer\API;
 $conn = new API('CONSUMER_KEY', 'CONSUMER_SECRET', 'OAUTH_TOKEN', 'OAUTH_TOKEN_SECRET');
 ```
 
+### Without composer
+```php
+<?php
+require 'src/API.php';
+use Twifer\API;
+$conn = new API('CONSUMER_KEY', 'CONSUMER_SECRET', 'OAUTH_TOKEN', 'OAUTH_TOKEN_SECRET');
+```
 
 ## Usage :
 ```php
