@@ -1,6 +1,6 @@
 ## Twifer
 Simple PHP Library for Standard Twitter API v1.1<br>
-<img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard" alt="Twitter API v1.1 badge" crossorigin="anonymous">
+<a href="https://github.com/ferrysyahrinal/twifer"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard" alt="Twitter API v1.1 badge" crossorigin="anonymous"></a>
 - Coded with :smoking: by [@senggolbaok](https://twitter.com/senggolbaok)
 - :smoking: Buy Me a Cigarette : https://trakteer.id/setandarisurga
 
@@ -9,7 +9,7 @@ Simple PHP Library for Standard Twitter API v1.1<br>
 composer require ferrysyahrinal/twifer
 ```
 
-```
+```php
 <?php
 require 'vendor/autoload.php';
 use Twifer\API;
@@ -18,30 +18,27 @@ $conn = new API('CONSUMER_KEY', 'CONSUMER_SECRET', 'OAUTH_TOKEN', 'OAUTH_TOKEN_S
 
 
 ## Usage :
-```
+```php
 // Post tweet
 $parameter = ['status' => 'Hi World'];
 $req = $conn->request('POST', 'statuses/update', $parameter);
-$req = json_decode($req, true);
 print_r($req);
 ```
 
-```
+```php
 // Delete tweet
 $id = '1512864814338506753'; //id tweet
 $req = $conn->request('POST', 'statuses/destroy/' . $id);
-$req = json_decode($req, true);
 print_r($req);
 ```
 
-```
+```php
 // Get direct message
 $req = $conn->request('GET', 'direct_messages/events/list');
-$req = json_decode($req, true);
 print_r($req);
 ```
 
-```
+```php
 // Fetch image direct message / save image in direct message
 $imgUrl = 'https://ton.twitter.com/i/ton/data/dm/1512867595292057605/1512867589323882496/_6uELIwA.png'; //img url in direct message
 $req = $conn->file($imgUrl);
@@ -49,11 +46,10 @@ file_put_contents('saveImage.jpg', $req);
 //print_r(base64_encode($req));
 ```
 
-```
+```php
 // Lookup users
 $parameter = ['screen_name' => 'senggolbaok'];
 $req = $conn->request('GET', 'users/lookup', $parameter);
-$req = json_decode($req, true);
 print_r($req);
 ```
 
