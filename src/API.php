@@ -124,8 +124,7 @@ class API
             $filename = $params['media_data'];
             $arr = ['media_data' => $filename];
         } else {
-            return 'upload using parameter media_category & additional_owners doesnt work :(';
-            exit;
+            $arr = $params;
         }
 
         $oauth = $this->oauth;
