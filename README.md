@@ -1,6 +1,7 @@
 ## Twifer
-Simple PHP Library for Standard Twitter API v1.1<br>
-<a href="https://github.com/ferrysyahrinal/twifer"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard" alt="Twitter API v1.1 badge" crossorigin="anonymous"></a>
+Simple PHP Library for Twitter API Standard v1.1 && Twitter API v2<br>
+<a href="https://github.com/ferrysyahrinal/twifer"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard"></a>
+<a href="https://github.com/ferrysyahrinal/twifer"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fv2"></a>
 - Coded with :smoking: by [@senggolbaok](https://twitter.com/senggolbaok)
 - :smoking: Buy Me a Cigarette : https://trakteer.id/setandarisurga
 
@@ -53,9 +54,10 @@ $req = $conn->request('GET', 'users/lookup', $parameter);
 print_r($req);
 ```
 
-See more example : [example.php](example.php)
+See more example : [examples/](examples/)
 
-Read more https://developer.twitter.com/en/docs/twitter-api/v1 to know other parameters.
+Read more : https://developer.twitter.com/en/docs/twitter-api/v1 to know other parameters. <br>
+Twitter API v2 calls : https://developer.twitter.com/apitools/api
 
 ## License
 This open-source software is distributed under the MIT License. See [License](LICENSE)

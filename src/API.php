@@ -171,6 +171,15 @@ class API
             return $this->request2($method, $req, $params);
         }
 
+        if ($version[0] == 'labs') {
+            $req = "/$req";
+            return $this->request2($method, $req, $params);
+        }
+
+        if ($version[1] == 'labs') {
+            return $this->request2($method, $req, $params);
+        }
+
         $url = $this->apiStandardUrl . $req . ".json";
 
         if ($this->oauth_token !== false && $this->oauth_token_secret == false) {

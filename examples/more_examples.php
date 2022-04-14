@@ -1,9 +1,10 @@
 <?php
 
 require 'vendor/autoload.php';
+require 'config.php';
 use Twifer\API;
 
-$conn = new API('CONSUMER_KEY', 'CONSUMER_SECRET', 'OAUTH_TOKEN', 'OAUTH_TOKEN_SECRET');
+$conn = new API(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET);
 
 /*
  *
@@ -21,7 +22,6 @@ print_r($req);
 // Post tweet
 $parameter = ['status' => 'Hi World'];
 $req = $conn->request('POST', 'statuses/update', $parameter);
-
 print_r($req);
 
 // Delete tweet
@@ -43,8 +43,8 @@ print_r($req);
 $req = $conn->request('GET', 'direct_messages/events/list');
 print_r($req);
 
-// Fetch image direct message
-$imgUrl = 'https://ton.twitter.com/i/ton/data/dm/1512867595292057605/1512867589323882496/_6uELIwA.png';
+// Fetch image direct message / save image in direct message
+$imgUrl = 'https://ton.twitter.com/i/ton/data/dm/1512867595292057605/1512867589323882496/_6uELIwA.png'; 
 $req = $conn->file($imgUrl);
 file_put_contents('saveImage.jpg', $req);
 //print_r(base64_encode($req));
