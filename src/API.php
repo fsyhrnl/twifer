@@ -93,7 +93,6 @@ class API
     protected function reqCurl($method = 'GET', $url, $params = false, $headers = false, $postfields = false, $userpwd = false)
     {
         $ch = curl_init();
-
         if ($params == false) {
             curl_setopt($ch, CURLOPT_URL, $url);
         }
@@ -148,13 +147,12 @@ class API
             $headers[] = $this->buildAutheaders($oauth);
         }
 
-        $result = $this->reqCurl($method, $url, null, $headers, $params);
+        $result = $this->reqCurl($method, $url, $method=='GET'? $params : null, $headers, $method=='POST' ? $params:null);
         return json_decode($result, true);
     }
 
     public function request($method, $req, $params = false)
     {
-
         $method = strtoupper($method);
 
         if ($req == 'media/upload') {

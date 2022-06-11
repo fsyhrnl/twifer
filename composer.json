@@ -1,5 +1,5 @@
 {
-    "name": "ferrysyahrinal/twifer",
+    "name": "jerrkill/twifer",
     "description": "Simple PHP Library for Twitter API",
     "type": "library",
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Ferry Syahrinal",
             "email": "ferrysyahrinal2@gmail.com"
+        },
+        {
+            "name": "Jerrkill",
+            "email": "jerrkill123@gmail.com"
         }
     ],
     "require": {},

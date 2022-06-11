@@ -1,15 +1,18 @@
 ## Twifer
 Simple PHP Library for Twitter API Standard v1.1 & Twitter API v2<br>
-<a href="https://github.com/ferrysyahrinal/twifer"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard"></a>
-<a href="https://github.com/ferrysyahrinal/twifer"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fv2"></a>
+<a href="https://github.com/jerrkill/twifer"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard"></a>
+<a href="https://github.com/jerrkill/twifer"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fv2"></a>
 - Coded with :heart: by [@senggolbaok](https://twitter.com/senggolbaok)
 - Buy Me a Cigarette : https://trakteer.id/setandarisurga :smoking:
 
 ## Installation
 
 ### Install with composer
+
+Fork from https://github.com/ferrysyahrinal/twifer
+
 ```
-composer require ferrysyahrinal/twifer
+composer require jerrkill/twifer
 ```
 
 ```php
