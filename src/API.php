@@ -142,7 +142,7 @@ class API
 
         } else {
 
-            $oauth = $this->getSignature($method, $url);
+            $oauth = $this->getSignature($method, $url, $params);
             $headers = [];
             $headers[] = 'Content-type: application/json';
             $headers[] = $this->buildAutheaders($oauth);
