@@ -1,9 +1,13 @@
 {
-    "name": "ferrysyahrinal/twifer",
+    "name": "Deakin/twifer",
     "description": "Simple PHP Library for Twitter API",
     "type": "library",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Anthony George",
+            "email": "anthony.george@deakin.edu.au"
+        },
         {
             "name": "Ferry Syahrinal",
             "email": "ferrysyahrinal2@gmail.com"
