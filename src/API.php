@@ -126,7 +126,18 @@ class API
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
         $result = curl_exec($ch);
-        return $result;
+
+        // Get the cURL info
+        $info = curl_getinfo($ch);
+
+        // Create an associative array with response and info
+        $responseData = array(
+            'response' => $result,
+            'info' => $info
+        );
+
+        // Return the response and info
+        return $responseData;
     }
 
     protected function request2($method, $req, $params = false)
@@ -149,7 +160,7 @@ class API
         }
 
         $result = $this->reqCurl($method, $url, null, $headers, $params);
-        return json_decode($result, true);
+        return $result;
     }
 
     public function request($method, $req, $params = false)
@@ -197,7 +208,7 @@ class API
         }
 
         $result = $this->reqCurl($method, $url, $params, $headers, null);
-        return json_decode($result, true);
+        return $result;
 
     }
 
@@ -211,7 +222,7 @@ class API
         $headers[] = 'Content-Type: multipart/form-data';
 
         $result = $this->reqCurl($method, $url, null, $headers, $params);
-        return json_decode($result, true);
+        return $result;
     }
 
     protected function uploadChunked($req, $params)
@@ -318,7 +329,7 @@ class API
     {
         $url = $this->apiUrl . $req;
         $result = $this->reqCurl("POST", $url, $params, null, null, true);
-        return json_decode($result, true);
+        return $result['response'];
     }
 
 }
